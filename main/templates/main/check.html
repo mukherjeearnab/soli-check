@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %} {% block content %} {% load crispy_forms_tags %}
+
+<form method="post" action="/">
+    <div class="col">
+        <div class="row">{{ form|crispy }} {% csrf_token %}</div>
+
+        <br />
+
+        <div class="row">
+            <div class="col-4">
+                <button type="submit" name="submit" class="btn btn-primary">Check Bytecode</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+{% endblock %}
