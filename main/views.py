@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import CheckBytecode
+from .ml_model import model
 
 # Create your views here.
 
@@ -11,10 +12,7 @@ def index(response):
         # check bytecode
         if form.is_valid():
             bytecode = form.cleaned_data['bytecode']
-            if bytecode == 'hello':
-                result = True
-            else:
-                result = False
+            result = model.check(bytecode)
     else:
         result = None
         form = CheckBytecode()
