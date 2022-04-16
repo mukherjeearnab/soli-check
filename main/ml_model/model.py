@@ -15,7 +15,7 @@ def check(bytecode):
 
 
 def detection(vector):
-    model = load_model('./model/model_sm_rus_128.h5')
+    model = load_model('./model/model_sm_rus_6.h5')
 
     model.summary()
 
@@ -23,6 +23,8 @@ def detection(vector):
 
     result = model.predict(np.array(vector))
 
-    result = np.argmax(result, axis=1)
+    print(result)
 
-    return result[0]
+    result = 1 if result[0][0] > 0.5 else 0
+
+    return result
