@@ -12,8 +12,8 @@ def index(response):
         # check bytecode
         if form.is_valid():
             bytecode = form.cleaned_data['bytecode']
-            result = model.check(bytecode)
+            result, detection = model.check(bytecode)
     else:
         result = None
         form = CheckBytecode()
-    return render(response, 'main/check.html', {'form': form, 'result': result})
+    return render(response, 'main/check.html', {'form': form, 'result': result, 'detection': detection})

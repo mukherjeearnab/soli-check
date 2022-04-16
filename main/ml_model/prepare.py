@@ -9,6 +9,9 @@ TRUNC_TYPE = 'post'
 PADDING_TYPE = 'post'
 OOV_TOKEN = '<OOV>'
 
+with open('./model/tokenizer.pickle', 'rb') as fh:
+    tokenizer = pickle.load(fh)
+
 
 def re_hex_val(opcode):
     opcode = str(opcode)
@@ -20,10 +23,7 @@ def re_hex_val(opcode):
     return opcode
 
 
-def tokenizer(opcode):
-    with open('./model/tokenizer.pickle', 'rb') as fh:
-        tokenizer = pickle.load(fh)
-
+def tokenize(opcode):
     tokenized_opcodes = tokenizer.texts_to_sequences([opcode])
     padded_opcodes = pad_sequences(
         tokenized_opcodes, maxlen=OPCODE_SEQ_LEN, padding=PADDING_TYPE, truncating=TRUNC_TYPE)
@@ -36,7 +36,7 @@ def prepare(opcode):
     opcode = re_hex_val(opcode)
 
     # Tokenize the Opcode Sequence
-    opcode = tokenizer(opcode)
+    opcode = tokenize(opcode)
 
     print(opcode)
 
